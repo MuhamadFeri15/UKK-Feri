@@ -31,7 +31,7 @@
                                     <td class="px-6 py-4 text-gray-900 dark:text-white">{{ $index + 1 }}</td>
                                     <td class="px-6 py-4 text-gray-900 dark:text-white">{{ $produk->nama_produk}}</td>
                                     <td class="px-6 py-4">
-                                        <img src="{{ asset('storage/' . $produk->gambar) }}" class="w-16 h-16 object-cover rounded-lg">
+                                        <img src="{{ asset('storage/' . $produk->gambar_produk) }}" class="w-16 h-16 object-cover rounded-lg">
                                     </td>
                                     <td class="px-6 py-4 text-gray-900 dark:text-white">Rp {{ number_format($produk->harga, 0, ',', '.') }}</td>
                                     <td class="px-6 py-4 text-gray-900 dark:text-white">{{ $produk->stock }}</td>

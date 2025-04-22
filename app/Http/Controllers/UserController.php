@@ -97,6 +97,6 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->with('successDelete', 'User berhasil dihapus.');
     }
-    
+
 
 }

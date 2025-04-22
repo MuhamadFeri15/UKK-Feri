@@ -29,31 +29,33 @@ class ProdukController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   
 
-     
+
+
 
      public function store(Request $request)
-     {
-         $request->validate([
-             'nama_produk' => 'required|string|max:255',
-             'gambar_produk' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-             'harga' => 'required|numeric',
-             'stock' => 'required|numeric',
-         ]);
- 
-         $gambar = $request->file('gambar_produk');
-         $gambarBase64 = base64_encode(file_get_contents($gambar->path()));
- 
-         Produk::create([
-             'nama_produk' => $request->nama_produk,
-             'gambar_produk' => $gambarBase64,
-             'harga' => $request->harga,
-             'stock' => $request->stock,
-         ]);
- 
-         return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
-     }
+{
+    $request->validate([
+        'nama_produk' => 'required|string|max:255',
+        'gambar_produk' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'harga' => 'required|numeric',
+        'stock' => 'required|numeric',
+    ]);
+
+    // Store the image in the public/storage directory
+    $gambar = $request->file('gambar_produk');
+    $gambarPath = $gambar->store('produk_images', 'public'); // This saves the image in storage/app/public/produk_images
+
+    Produk::create([
+        'nama_produk' => $request->nama_produk,
+        'gambar_produk' => $gambarPath,  // Store the path to the image in the database
+        'harga' => $request->harga,
+        'stock' => $request->stock,
+    ]);
+
+    return redirect()->route('produk.index')->with('success', 'Produk berhasil ditambahkan.');
+}
+
     /**
      * Display the specified resource.
      */
@@ -118,6 +120,6 @@ class ProdukController extends Controller
         $produk = Produk::findOrFail($id);
         $produk->delete();
         return redirect()->route('produk.index')->with('success', 'Produk berhasil dihapus.');
-       
+
     }
 }

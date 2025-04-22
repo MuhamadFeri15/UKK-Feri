@@ -10,7 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PembelianController;
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('index');
 });
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -20,7 +20,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::middleware(['auth'])->group(function () {
 
    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');  
+   Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
    Route::get('/user', [UserController::class, 'index'])->name('user.index');
    Route::get('/user/tambah', [UserController::class, 'create'])->name('user.tambahUser');
    Route::post('/user', [UserController::class, 'store'])->name('user.store');
@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+
 
    Route::get('/produk', [ProdukController::class, 'index'])->name('produk.index');
    Route::get('/produk/tambah', [ProdukController::class, 'create'])->name('produk.create');
@@ -39,13 +41,14 @@ Route::middleware(['auth'])->group(function () {
 
 
    Route::get('/transaksi', [PembelianController::class, 'index'])->name('pembelian.index');
-   Route::get('/transaksi/tambah', [PembelianController::class, 'create'])->name('pembelian.create');
+  Route::get('/transaksi/tambah', [PembelianController::class, 'create'])->name('pembelian.create');
    Route::post('/transaksi', [PembelianController::class, 'store'])->name('pembelian.store');
-   Route::get('/export-pembelian', [PembelianController::class, 'exportExcel'])->name('pembelian.exportExcel');
+   Route::get('/pembelian/export', [PembelianController::class, 'exportPembelians'])->name('pembelian.exportExcel');
+
 
 });
 
 
-  
-   
+
+
 

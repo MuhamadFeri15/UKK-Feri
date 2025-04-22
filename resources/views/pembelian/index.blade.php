@@ -52,42 +52,46 @@
                     <a href="{{ route('pembelian.exportExcel', request()->query()) }}" class="btn bg-green-500 text-white px-4 py-2 rounded-md">
                         <i class="fas fa-file-excel mr-2"></i>Export Excel
                     </a>
-                    @if(auth()->check() && auth()->user()->role === 'petugas')
+
                         <a href="{{ route('pembelian.create') }}" class="btn bg-blue-500 text-white px-4 py-2 rounded-md">
                             <i class="fas fa-plus mr-2"></i>Tambah Pembelian
                         </a>
-                    @endif
+
                 </div>
             </div>
 
             <div class="p-4">
                 <div class="overflow-x-auto">
-                    <table class="table-auto w-full text-left border-collapse">
-                        <thead>
-                            <tr class="bg-gray-100">
-                                <th class="px-4 py-2 text-center">No</th>
-                                <th class="px-4 py-2 text-center">Nama Pelanggan</th>
-                                <th class="px-4 py-2 text-center">Tanggal Penjualan</th>
-                                <th class="px-4 py-2 text-center">Total Harga</th>
-                                <th class="px-4 py-2 text-center">Dibuat Oleh</th>
-                                <th class="px-4 py-2 text-center">Aksi</th>
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 border-collapse">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 border-b border-gray-200 dark:border-gray-600 text-center">No</th>
+                                <th scope="col" class="px-6 py-3 border-b border-gray-200 dark:border-gray-600 text-center">Nama Pelanggan</th>
+                                <th scope="col" class="px-6 py-3 border-b border-gray-200 dark:border-gray-600 text-center">Tanggal Penjualan</th>
+                                <th scope="col" class="px-6 py-3 border-b border-gray-200 dark:border-gray-600 text-center">Total Harga</th>
+                                <th scope="col" class="px-6 py-3 border-b border-gray-200 dark:border-gray-600 text-center">Dibuat Oleh</th>
+                                <th scope="col" class="px-6 py-3 border-b border-gray-200 dark:border-gray-600 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($pembelian as $sales)
-                                <tr class="border-t">
-                                    <td class="px-4 py-2 text-center">{{ $loop->iteration }}</td>
-                                    <td class="px-4 py-2 text-center">{{ $sales->nama_pelanggan }}</td>
-                                    <td class="px-4 py-2 text-center">{{ $sales->tanggal_penjualan }}</td>
-                                    <td class="px-4 py-2 text-center">{{ $sales->total_harga }}</td>
-                                    <td class="px-4 py-2 text-center">{{ $sales->dibuat_oleh }}</td>
-                                    <td class="px-4 py-2 text-center">
-                                        <a href="" class="btn bg-gray-500 text-white px-4 py-2 rounded-md" target="_blank">
-                                            Export PDF
+                            @forelse ($pembelian as $sales)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-200">
+                                    <td class="px-6 py-4 text-center text-gray-900 dark:text-white">{{ $loop->iteration }}</td>
+                                    <td class="px-6 py-4 text-center text-gray-900 dark:text-white">{{ $sales->nama_pelanggan }}</td>
+                                    <td class="px-6 py-4 text-center text-gray-900 dark:text-white">{{ $sales->tanggal_penjualan }}</td>
+                                    <td class="px-6 py-4 text-center text-gray-900 dark:text-white">Rp {{ number_format($sales->total_harga, 0, ',', '.') }}</td>
+                                    <td class="px-6 py-4 text-center text-gray-900 dark:text-white">{{ $sales->dibuat_oleh }}</td>
+                                    <td class="px-6 py-4 text-center">
+                                        <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-gray-600 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:bg-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-800" target="_blank">
+                                            <i class="fas fa-file-pdf mr-2"></i> Export PDF
                                         </a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="px-6 py-4 text-center text-gray-500 dark:text-gray-400">Tidak ada data pembelian.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
