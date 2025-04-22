@@ -17,6 +17,8 @@
                         id="email"
                         name="email"
                         class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="email"
+                        value="{{ old('email') }}"
                         required
                     />
                 </div>
@@ -27,6 +29,8 @@
                         id="password"
                         name="password"
                         class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="password"
+                        value="{{ old('password') }}"
                         required
                     />
                 </div>

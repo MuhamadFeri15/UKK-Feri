@@ -14,18 +14,25 @@ class LoginSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('admin123'),
-            'role' => 'admin',
-        ]);
+        // User::create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@gmail.com',
+        //     'password' => Hash::make('admin123'),
+        //     'role' => 'admin',
+        // ]);
+
+        // User::create([
+        //     'name' => 'Petugas',
+        //     'email' => 'petugas@gmail.com',
+        //     'password' => Hash::make('petugas123'),
+        //     'role' => 'petugas',
+        // ]);
 
         User::create([
-            'name' => 'Petugas',
-            'email' => 'petugas@gmail.com',
-            'password' => Hash::make('petugas123'),
-            'role' => 'petugas',
+            'name' => 'Admin',
+            'email' => 'admin7@gmail.com',
+            'password' => Hash::make('admin2223'),
+            'role' => 'admin',
         ]);
     }
 }

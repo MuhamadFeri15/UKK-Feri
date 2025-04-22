@@ -15,6 +15,7 @@ class Produk extends Model
         'stock',
     ];
 
+
     public function detailPembelians()
     {
         return $this->hasMany(DetailPembelian::class);
